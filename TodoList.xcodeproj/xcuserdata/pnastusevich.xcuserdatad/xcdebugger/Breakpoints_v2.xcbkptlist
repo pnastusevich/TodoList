@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "A617AEBA-292E-4D5D-894E-9CCB29AD8EC6"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D7BBA3AE-2E0E-42D6-8E3F-262A2750E90F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TodoList/Modules/TodoList/TodoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D7BBA3AE-2E0E-42D6-8E3F-262A2750E90F - 7a9622bbc1a3c6df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;TodoList.TodoInApi, TodoList.NetworkError&gt;) -&gt; () in TodoList.TodoListViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "TodoList.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pnastusevich/Documents/Swift/1%20App/%D0%A1%D0%B2%D0%BE%D0%B8/TodoList/TodoList/Modules/TodoList/TodoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23">
+               </Location>
+               <Location
+                  uuid = "D7BBA3AE-2E0E-42D6-8E3F-262A2750E90F - 7a9622bbc1a3c7c6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;TodoList.TodoInApi, TodoList.NetworkError&gt;) -&gt; () in TodoList.TodoListViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "TodoList.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pnastusevich/Documents/Swift/1%20App/%D0%A1%D0%B2%D0%BE%D0%B8/TodoList/TodoList/Modules/TodoList/TodoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
