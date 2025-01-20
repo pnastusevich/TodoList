@@ -16,6 +16,12 @@ protocol TaskListViewOutputProtocol: AnyObject {
     init(view: TaskListViewInputProtocol)
     func viewDidLoad()
     func didTapAddTaskButton()
+    func doneTasks(at index: Int)
+    func updateTask(_ task: Task)
+    
+    func editTask(with task: TaskCellViewModelProtocol)
+    func shareTask(with task: TaskCellViewModelProtocol)
+    func deleteTask(with task: TaskCellViewModelProtocol)
 }
 
 final class TaskListViewController: UIViewController {
@@ -164,6 +170,7 @@ extension TaskListViewController: UITableViewDataSource  {
         guard let cell = cell as? TaskCell else { return UITableViewCell() }
         
         cell.viewModel = cellViewModel
+        cell.contextMenuDelegate = self
         cell.selectionStyle = .none
         
         return cell
@@ -208,6 +215,21 @@ extension TaskListViewController: UISearchBarDelegate {
         searchBar.text = ""
 //        presenter.searchTasks(with: "")
         searchBar.resignFirstResponder()
+    }
+}
+
+// MARK: - TaskCellContextMenuDelegate
+extension TaskListViewController: TaskCellContextMenuDelegate {
+    func didSelectEdit(for task: TaskCellViewModelProtocol) {
+        presenter.editTask(with: task)
+    }
+
+    func didSelectShare(for task: TaskCellViewModelProtocol) {
+        presenter.shareTask(with: task)
+    }
+
+    func didSelectDelete(for task: TaskCellViewModelProtocol) {
+        presenter.deleteTask(with: task)
     }
 }
 
