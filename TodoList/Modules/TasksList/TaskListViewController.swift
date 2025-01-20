@@ -76,7 +76,7 @@ final class TaskListViewController: UIViewController {
     }
     
     @objc func addTaskButtonTapped() {
-        
+        presenter.didTapAddTaskButton()
     }
     
     // MARK: - Setup UI

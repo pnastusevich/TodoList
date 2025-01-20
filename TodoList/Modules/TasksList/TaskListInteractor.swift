@@ -12,6 +12,7 @@ protocol TaskListInteractorInputProtocol {
     func fetchTaskList()
     func doneTask(task: Task?)
     func deleteTask(task: Task)
+    func giveStorageServices() -> StorageServicesProtocol
 }
 
 protocol TaskListInteractorOutputProtocol: AnyObject {
@@ -34,6 +35,11 @@ final class TaskListInteractor: TaskListInteractorInputProtocol {
         self.presenter = presenter
     }
     
+    func giveStorageServices() -> any StorageServicesProtocol {
+        return storageServices
+    }
+    
+    // MARK: - Work in Data - CRUD
     func fetchTaskList() {
         storageServices.fetchDataTask { [weak self]
             result in

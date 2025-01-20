@@ -30,7 +30,7 @@ final class TaskListPresenter: TaskListViewOutputProtocol {
     }
     
     func editTask(with task: TaskCellViewModelProtocol) {
-//        router.openTaskDetailsViewController(with: task.task, storageManager: interactor.giveStorageManager())
+        router.openTaskDetailsViewController(with: task.task, storageService: interactor.giveStorageServices())
     }
     
     func shareTask(with task: TaskCellViewModelProtocol) {
@@ -42,11 +42,17 @@ final class TaskListPresenter: TaskListViewOutputProtocol {
     }
     
     func didTapAddTaskButton() {
-//        router.openNewTaskViewController(storageManager: interactor.giveStorageManager())
+        router.openNewTaskViewController(storageService: interactor.giveStorageServices())
     }
     
     func doneTasks(at index: Int) {
-        //
+        guard let dataStore = dataStore else { return }
+        
+        dataStore.tasksList[index].isCompleted = true
+        let taskCellViewModel = dataStore.section.rows[index] as? TaskCellViewModel
+        taskCellViewModel?.isCompleted = true
+        interactor.doneTask(task: dataStore.tasksList[index])
+        view.reloadData(for: dataStore.section)
     }
     
     func updateTask(_ task: Task) {
