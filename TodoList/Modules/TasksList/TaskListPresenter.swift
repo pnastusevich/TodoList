@@ -30,7 +30,7 @@ final class TaskListPresenter: TaskListViewOutputProtocol {
     }
     
     func editTask(with task: TaskCellViewModelProtocol) {
-//        router.openTaskDetailsViewController(with: task.task, storageManager: interactor.giveStorageManager())
+        router.openTaskDetailsViewController(with: task.task, storageService: interactor.giveStorageServices())
     }
     
     func shareTask(with task: TaskCellViewModelProtocol) {
@@ -42,15 +42,42 @@ final class TaskListPresenter: TaskListViewOutputProtocol {
     }
     
     func didTapAddTaskButton() {
-//        router.openNewTaskViewController(storageManager: interactor.giveStorageManager())
+        router.openNewTaskViewController(storageService: interactor.giveStorageServices())
     }
     
     func doneTasks(at index: Int) {
-        //
+        guard let dataStore = dataStore else { return }
+        
+        dataStore.tasksList[index].isCompleted = true
+        let taskCellViewModel = dataStore.section.rows[index] as? TaskCellViewModel
+        taskCellViewModel?.isCompleted = true
+        interactor.doneTask(task: dataStore.tasksList[index])
+        view.reloadData(for: dataStore.section)
     }
     
     func updateTask(_ task: Task) {
         view.reloadData(for: dataStore!.section)
+    }
+    
+    func searchTasks(with query: String) {
+        guard let dataStore = dataStore else { return }
+        
+            let filteredRows: [TaskCellViewModelProtocol]
+            
+            if query.isEmpty {
+                filteredRows = dataStore.section.rows
+            } else {
+                filteredRows = dataStore.section.rows.filter { viewModel in
+                    guard let taskViewModel = viewModel as? TaskCellViewModel else { return false }
+                    let taskName = taskViewModel.task.name!.lowercased()
+                    let taskSubname = taskViewModel.task.subname!.lowercased()
+                    return taskName.contains(query.lowercased()) || taskSubname.contains(query.lowercased())
+                }
+            }
+            
+            let updatedSection = TaskSectionViewModel()
+            updatedSection.rows.append(contentsOf: filteredRows)
+            view.reloadData(for: updatedSection)
     }
 }
 
