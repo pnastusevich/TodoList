@@ -22,6 +22,8 @@ protocol TaskListViewOutputProtocol: AnyObject {
     func editTask(with task: TaskCellViewModelProtocol)
     func shareTask(with task: TaskCellViewModelProtocol)
     func deleteTask(with task: TaskCellViewModelProtocol)
+    
+    func searchTasks(with query: String)
 }
 
 final class TaskListViewController: UIViewController {
@@ -208,12 +210,12 @@ extension TaskListViewController: TaskListViewInputProtocol {
 // MARK: - UISearchBarDelegate
 extension TaskListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        presenter.searchTasks(with: searchText)
+        presenter.searchTasks(with: searchText)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
-//        presenter.searchTasks(with: "")
+        presenter.searchTasks(with: "")
         searchBar.resignFirstResponder()
     }
 }

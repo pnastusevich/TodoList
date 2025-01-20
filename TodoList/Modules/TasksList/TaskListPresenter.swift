@@ -52,6 +52,27 @@ final class TaskListPresenter: TaskListViewOutputProtocol {
     func updateTask(_ task: Task) {
         view.reloadData(for: dataStore!.section)
     }
+    
+    func searchTasks(with query: String) {
+        guard let dataStore = dataStore else { return }
+        
+            let filteredRows: [TaskCellViewModelProtocol]
+            
+            if query.isEmpty {
+                filteredRows = dataStore.section.rows
+            } else {
+                filteredRows = dataStore.section.rows.filter { viewModel in
+                    guard let taskViewModel = viewModel as? TaskCellViewModel else { return false }
+                    let taskName = taskViewModel.task.name!.lowercased()
+                    let taskSubname = taskViewModel.task.subname!.lowercased()
+                    return taskName.contains(query.lowercased()) || taskSubname.contains(query.lowercased())
+                }
+            }
+            
+            let updatedSection = TaskSectionViewModel()
+            updatedSection.rows.append(contentsOf: filteredRows)
+            view.reloadData(for: updatedSection)
+    }
 }
 
 // MARK: - TaskListInteractorOutputProtocol
