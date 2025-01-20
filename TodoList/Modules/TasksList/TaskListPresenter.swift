@@ -13,9 +13,7 @@ struct TaskListDataStore {
 }
 
 final class TaskListPresenter: TaskListViewOutputProtocol {
-    
-    
-    
+   
     var interactor: TaskListInteractorInputProtocol!
     var router: TaskListRouterInputProtocol!
     
@@ -31,8 +29,28 @@ final class TaskListPresenter: TaskListViewOutputProtocol {
         interactor.fetchTaskList()
     }
     
+    func editTask(with task: TaskCellViewModelProtocol) {
+//        router.openTaskDetailsViewController(with: task.task, storageManager: interactor.giveStorageManager())
+    }
+    
+    func shareTask(with task: TaskCellViewModelProtocol) {
+        print("share task")
+    }
+    
+    func deleteTask(with task: TaskCellViewModelProtocol) {
+        interactor.deleteTask(task: task.task)
+    }
+    
     func didTapAddTaskButton() {
-        
+//        router.openNewTaskViewController(storageManager: interactor.giveStorageManager())
+    }
+    
+    func doneTasks(at index: Int) {
+        //
+    }
+    
+    func updateTask(_ task: Task) {
+        view.reloadData(for: dataStore!.section)
     }
 }
 

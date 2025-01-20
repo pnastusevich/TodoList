@@ -19,6 +19,7 @@ final class TaskCell: UITableViewCell, CellModelRepresentable {
     
     static let cellID = "TaskCell"
     weak var delegate: TaskCellDelegate?
+    weak var contextMenuDelegate: TaskCellContextMenuDelegate?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -69,6 +70,7 @@ final class TaskCell: UITableViewCell, CellModelRepresentable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addContextMenuInteraction()
         
         setupLayout()
         isCompleteButton.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
@@ -76,6 +78,13 @@ final class TaskCell: UITableViewCell, CellModelRepresentable {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func addContextMenuInteraction() {
+        let interaction = UIContextMenuInteraction(delegate: self)
+        self.addInteraction(interaction)
+        
+        self.selectionStyle = .none
     }
         
     @objc private func didTapCompleteButton() {
