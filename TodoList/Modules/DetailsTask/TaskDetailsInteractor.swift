@@ -24,7 +24,6 @@ final class TaskDetailsInteractor: TaskDetailsInteractorInputProtocol {
     private var task: Task?
     private let storageService: StorageServicesProtocol
     
-   
     init(presenter: TaskDetailsInteractorOutputProtocol, task: Task? = nil, storageService: StorageServicesProtocol) {
         self.presenter = presenter
         self.task = task
